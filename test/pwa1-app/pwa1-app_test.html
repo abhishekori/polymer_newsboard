@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>pwa1-app test</title>
+
+    <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../../src/pwa1-app/pwa1-app.html">
+  </head>
+  <body>
+    <test-fixture id="basic">
+      <template>
+        <pwa1-app></pwa1-app>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('pwa1-app', function() {
+        test('instantiating the element works', function() {
+          var element = fixture('basic');
+          assert.equal(element.is, 'pwa1-app');
+        });
+      });
+    </script>
+  </body>
+</html>

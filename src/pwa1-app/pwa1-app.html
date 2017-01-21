@@ -1,0 +1,180 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/app-layout/app-layout.html">
+<link rel="import" href="/bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html"/>
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html"/>
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html"/>
+<link rel="import" href="../../bower_components/app-layout/app-header/app-header.html"/>
+<link rel="import" href="../../bower_components/paper-input/paper-textarea.html"/>
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-iconset-svg/iron-iconset-svg.html">
+
+<link rel="import" href="../../bower_components/paper-input/paper-input.html"/>
+<link rel="import" href="../../bower_components/paper-card/paper-card.html"/>
+<link rel="import" href="../../bower_components/paper-button/paper-button.html"/>
+<link rel="import" href="../../bower_components/iron-list/iron-list.html"/>
+<link rel="import" href="../../bower_components/polymerfire/firebase-query.html">
+
+<dom-module id="pwa1-app">
+  <template>
+    <style include="app-grid-style">
+      :host {
+        display: block;
+        --app-grid-columns: 3;
+        --app-grid-item-height: 100px;
+      }
+      app-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1;
+
+        color: #fff;
+        background-color: #4285f4;
+        box-shadow: #111111 1px 1px 10px;
+      }
+      paper-card{
+        margin-top: 100px;
+        width: 100%;
+
+      }
+      paper-icon-button {
+        --paper-icon-button-ink-color: white;
+      }
+      .news-desc{
+        height: 50px;
+      }
+      #btn-submitNews{
+        background-color: #4285f4;
+        color: #ffffff;
+
+      }
+      .card-actions{
+        text-align: center;
+      }
+
+      .news_container {
+      @apply(--layout-horizontal);
+      }
+      .news_flex1{
+      @apply(--layout-flex);
+      }
+      .news_flex2{
+      @apply(--layout-flex-1);
+      }
+    </style>
+    <app-header fixed>
+      <app-toolbar>
+        <h2>News Board</h2>
+      </app-toolbar>
+    </app-header>
+    <paper-card heading="Add news">
+      <div class="card-content">
+
+        <paper-input id="newsTitle" name="newstitle" label="News title"></paper-input>
+        <paper-textarea id="newsContent" label="News description" value="{{newsTitle}}" value="{{newsContent}}">{{newsTitle}}</paper-textarea>
+      </div>
+      <div class="card-actions">
+        <paper-button raised id="btn-submitNews" on-tap="_submitNews">Submit</paper-button>
+
+      </div>
+
+    </paper-card>
+
+    <paper-card heading="News List">
+      <div class="card-content">
+        <template id="IdnewsList" is="dom-repeat" items="{{newsList}}" as="news" sort=""_sort>
+          <div class="news_container">
+            <div class="news_flex1">
+            <h2>{{news.newsTitle}}</h2>
+            <p>{{news.newsContent}}</p>
+            </div>
+            <div  class="news_flex2">
+
+              <h3>{{news.votes}}</h3>
+
+              <paper-button on-tap="_upVote" news="[[news]]">Upvote</paper-button>
+              <paper-button on-tap="_downVote" news="[[news]]">Downvote</paper-button>
+            </div>
+          </div>
+        </template>
+      </div>
+
+    </paper-card>
+    <firebase-query
+            id="query"
+            app-name="newsboard"
+            path="/news"
+            data="{{newsList}}">
+    </firebase-query>
+
+    <!--<template is="dom-repeat" items="[[newsList]]" as="new">-->
+      <!--[[new.newsTitle]]-->
+    <!--</template>-->
+</template>
+    <script>
+    Polymer({
+
+      is: 'pwa1-app',
+
+      properties: {
+        votes:{
+          type:Number
+        },
+        newsTitle:{
+          type:String
+        },
+        newsContent:{
+          type:String
+        },
+        news:{
+          type:Object,
+          value:function(){
+            return {};
+          }
+        },
+
+        newsList:{
+          type:Array,
+          value:function(){
+            return [];
+          }
+        }
+      },ready:function(){
+        this.news={};
+
+        this.newsList=[{
+          newsTitle:"",
+          newsContent:"",
+          votes:0
+        }];
+        console.log(this.newsList);
+    },
+      _submitNews:function(){
+        //var news={};
+        this.news['newsTitle']=newsTitle.value;
+        this.news['newsContent']=newsContent.value;
+        this.news['votes']=0;
+       // this.push('newsList',this.news);
+        this.$.query.ref.push(this.news);
+
+      },
+      _upVote:function(e){
+        var key=e.currentTarget.news.$key;
+        var votes=this.$.query.child(key).votes+1;
+        this.$.query.ref.child(key).set({votes:votes})
+
+      },
+      _downVote: function (e){
+        var key= e.currentTarget.news.$key;
+        var votes=this.$.query.child(key).votes-1;
+        this.$.query.ref.child(key).set({votes:votes});
+        //console.log(e.target);
+
+
+      }
+
+    });
+  </script>
+</dom-module>

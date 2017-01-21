@@ -3,7 +3,7 @@
   "short_name": "News Board",
   "theme_color": "#2196f3",
   "background_color": "#2196f3",
-  "display": "fullscreen",
+  "display": "standalone",
   "scope": "/",
   "start_url": "/",
   "shell": "src/pwa1-app/pwa1-app.html",

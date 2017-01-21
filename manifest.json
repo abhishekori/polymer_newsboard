@@ -1,6 +1,14 @@
 {
   "name": "News Board",
-  "short_name": "pwa1",
+  "short_name": "News Board",
+  "theme_color": "#2196f3",
+  "background_color": "#2196f3",
+  "display": "standalone",
+  "scope": "/",
   "start_url": "/",
-  "display": "standalone"
+  "shell": "src/pwa1-app/pwa1-app.html",
+  "includeDependencies": [
+    "manifest.json",
+    "bower_components/webcomponentsjs/webcomponents-lite.js"
+  ]
 }

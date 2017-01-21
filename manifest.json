@@ -1,5 +1,5 @@
 {
-  "name": "pwa1",
+  "name": "News Board",
   "short_name": "pwa1",
   "start_url": "/",
   "display": "standalone"

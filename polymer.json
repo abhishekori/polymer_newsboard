@@ -2,7 +2,7 @@
   "entrypoint": "index.html",
   "shell": "src/pwa1-app/pwa1-app.html",
   "fragments": [
-    "src/pwa1-app/pwa1-app.html",
+    "src/pwa1-app/pwa1-app.html"
       ],
   "sourceGlobs": [
     "src/**/*",

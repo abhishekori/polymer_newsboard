@@ -82,9 +82,13 @@
 
     </paper-card>
 
-    <paper-card heading="News List">
+    <paper-card heading="hello">
+
       <div class="card-content">
+        <h3 id="loading">Please wait.....</h3>
+
         <template id="IdnewsList" is="dom-repeat" items="{{newsList}}" as="news" sort="_sort">
+
           <div class="news_container">
             <div class="news_flex1">
             <h2>{{news.newsTitle}}</h2>
@@ -141,7 +145,7 @@
           value:function(){
             return [];
           }
-        }
+        },observer:'gotData'
       },ready:function(){
         this.news={};
 
@@ -180,6 +184,10 @@
       },renderFn:function(nv,ov){
 
         this.$.IdnewsList.render();
+      },gotData: function (nv, ov) {
+        alert("hai")
+       // this.$.loading.hide();
+
       }
 
     });

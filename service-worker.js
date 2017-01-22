@@ -10,11 +10,25 @@
 console.info('Service worker disabled for development, will be generated at build time.');/**
  * Created by abhishek on 22/1/17.
  */
-this.addEventListener('install', function(event) {
-    event.waitUntil(
-        caches.open('v1.0.1').then(function(cache) {
-            // ...
-            console.log("cached")
+//this.addEventListener('install', function(event) {
+//    event.waitUntil(
+//        caches.open('v1.0.1').then(function(cache) {
+//            // ...
+//            console.log("cached")
+//        })
+//    );
+//});
+self.addEventListener('activate', function(e) {
+    console.log('[ServiceWorker] Activate');
+    e.waitUntil(
+        caches.keys().then(function(keyList) {
+            return Promise.all(keyList.map(function(key) {
+                if (key !== cacheName) {
+                    console.log('[ServiceWorker] Removing old cache', key);
+                    return caches.delete(key);
+                }
+            }));
         })
     );
+    return self.clients.claim();
 });

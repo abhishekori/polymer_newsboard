@@ -12,15 +12,21 @@
     <!-- See https://goo.gl/OOhYW5 -->
     <link rel="manifest" href="manifest.json">
 
-    <script src="https://abhishekori.github.io/polymer_newsboard/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <!--<script src="https://abhishekori.github.io/polymer_newsboard/bower_components/webcomponentsjs/webcomponents-lite.js"></script>-->
 
-    <link rel="import" href="https://abhishekori.github.io/polymer_newsboard/src/pwa1-app/pwa1-app.html">
-    <link rel="import" href="https://abhishekori.github.io/polymer_newsboard/bower_components/polymerfire/firebase-app.html">
+    <!--<link rel="import" href="https://abhishekori.github.io/polymer_newsboard/src/pwa1-app/pwa1-app.html">-->
+    <!--<link rel="import" href="https://abhishekori.github.io/polymer_newsboard/bower_components/polymerfire/firebase-app.html">-->
+    <!--<script>-->
+      <!-- -->
+      <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="src/pwa1-app/pwa1-app.html">
+    <link rel="import" href="bower_components/polymerfire/firebase-app.html">
     <script>
 
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-          navigator.serviceWorker.register('https://abhishekori.github.io/polymer_newsboard/service-worker.js');
+          navigator.serviceWorker.register('service-worker.js');
         });
       }
 

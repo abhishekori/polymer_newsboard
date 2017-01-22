@@ -82,7 +82,7 @@
 
     </paper-card>
 
-    <paper-card heading="hello">
+    <paper-card heading="Please wait....." id="newsListHeading">
 
       <div class="card-content">
         <h3 id="loading">Please wait.....</h3>
@@ -144,8 +144,8 @@
           type:Array,
           value:function(){
             return [];
-          }
-        },observer:'gotData'
+          },observer:'gotData'
+        }
       },ready:function(){
         this.news={};
 
@@ -185,8 +185,8 @@
 
         this.$.IdnewsList.render();
       },gotData: function (nv, ov) {
-        alert("hai")
-       // this.$.loading.hide();
+        //alert("hai")
+       console.log(this.$.newsListHeading.heading="News List");
 
       }
 

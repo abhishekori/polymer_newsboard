@@ -3,12 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Notes">
 
     <title>News Board</title>
     <meta name="description" content="pwa1 description">
 
     <!-- See https://goo.gl/OOhYW5 -->
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="manifest.json">
 
     <script src="https://abhishekori.github.io/polymer_newsboard/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
@@ -29,6 +31,16 @@
     </style>
   </head>
   <body>
+  <platinum-sw-register
+          auto-register
+          skip-waiting
+          clients-claim
+          reload-on-install
+          href="sw-import.js">
+    <platinum-sw-cache
+            default-cache-strategy="networkFirst">
+    </platinum-sw-cache>
+  </platinum-sw-register>
   <firebase-app
           name="newsboard"
           api-key="AIzaSyBILs7xXoBvdWshpeDoLLLGF1ScQnCw5sM"
